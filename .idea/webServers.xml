@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="d3a85715-2727-482e-82a4-0efbc8c17dec" name="vagran-interpreter" url="http://localhost:11100">
+        <fileTransfer host="localhost" port="2222" accessType="SFTP" password="dfdcdfcbdfcddfd8dfcbdfc4dfde" username="vagrant">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
