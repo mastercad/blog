@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\UsergroupXRoute" table="userGroup_x_Route">
+    <indexes>
+      <index name="fk_userGroup_x_Route_userGroup1_idx" columns="userGroup_id"/>
+      <index name="fk_userGroup_x_Route_Route1_idx" columns="Route_id"/>
+    </indexes>
+    <unique-constraints>
+      <unique-constraint name="Route_UserGroup" columns="userGroup_id,Route_id"/>
+    </unique-constraints>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="route" target-entity="Route" fetch="LAZY">
+      <join-columns>
+        <join-column name="Route_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="usergroup" target-entity="Usergroup" fetch="LAZY">
+      <join-columns>
+        <join-column name="userGroup_id" referenced-column-name="userGroup"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

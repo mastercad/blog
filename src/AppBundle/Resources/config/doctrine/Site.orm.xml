@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Site" table="site">
+    <indexes>
+      <index name="fk_site_user1_idx" columns="createUser_id"/>
+      <index name="fk_site_user2_idx" columns="updateUser_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="content" type="text" column="content" length="65535" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="title" type="text" column="title" length="65535" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="visibility" type="boolean" column="visibility" nullable="false">
+      <options>
+        <option name="comment">1 = Project, 2 = App, 3 = Alle</option>
+        <option name="default">1</option>
+      </options>
+    </field>
+    <field name="created" type="datetime" column="created" nullable="false">
+      <options>
+        <option name="default">CURRENT_TIMESTAMP</option>
+      </options>
+    </field>
+    <field name="updated" type="datetime" column="updated" nullable="true"/>
+    <many-to-one field="updateuser" target-entity="User" fetch="LAZY">
+      <join-columns>
+        <join-column name="updateUser_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="createuser" target-entity="User" fetch="LAZY">
+      <join-columns>
+        <join-column name="createUser_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>
