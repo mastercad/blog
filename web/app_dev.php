@@ -16,7 +16,7 @@ if (isset($_SERVER['HTTP_CLIENT_IP'])
     || !(in_array(@$_SERVER['REMOTE_ADDR'], array('127.0.0.1', 'fe80::1', '::1', '10.0.2.2')) || php_sapi_name() === 'cli-server')
 ) {
     header('HTTP/1.0 403 Forbidden');
-    exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
+    exit('You are not allowed to access this file. Check ' . basename(__FILE__) . ' for more information.');
 }
 
 /**
@@ -26,7 +26,7 @@ $loader = require __DIR__.'/../app/autoload.php';
 Debug::enable();
 
 $kernel = new AppKernel('dev', true);
-$kernel->loadClassCache();
+//$kernel->loadClassCache();
 $request = Request::createFromGlobals();
 $response = $kernel->handle($request);
 $response->send();

@@ -27,7 +27,7 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class UserType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $aOptions)
     {
         $builder
             ->add('email', EmailType::class)

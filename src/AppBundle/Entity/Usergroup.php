@@ -5,7 +5,7 @@ namespace AppBundle\Entity;
 /**
  * Usergroup
  */
-class Usergroup
+class Usergroup 
 {
     /**
      * @var string
@@ -25,7 +25,7 @@ class Usergroup
     /**
      * @var integer
      */
-    private $usergroup;
+    private $id;
 
 
     /**
@@ -105,9 +105,9 @@ class Usergroup
      *
      * @return integer
      */
-    public function getUsergroup()
+    public function getId()
     {
-        return $this->usergroup;
+        return $this->id;
     }
 }
 

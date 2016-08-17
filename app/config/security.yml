@@ -1,37 +1,78 @@
 # To get started with security, check out the documentation:
 # http://symfony.com/doc/current/book/security.html
 security:
+    access_denied_url:    ~ # Example: /foo/error403
+    
     encoders:
         AppBundle\Entity\User:
             algorithm: bcrypt
-            
+        AppBundle\Security\User\WebserviceUser:
+            algorithm: bcrypt
+            cost: 12
+
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
+        webservice:
+            id: app.webservice_user_provider
+            
         our_db_provider:
             entity:
-                class: AbbBundle:User
-                property: username
+                class: AppBundle:User
+                property: loginname
+#        your_db_provider:
+#            entity:
+#                class: AppBundle:User
+#                property: username
+#                manager_name: ~
                 # if you're using multiple entity managers
                 # manager_name: customer
-        in_memory:
-            memory: ~
+
+#        in_memory:
+#            memory: 
+#                users:
+#                    andreas:
+#                        foo:  
+#                            password: foo
+#                            roles: ROLE_USER
+#                        bar:
+#                            password: bar
+#                            roles: [ROLE_USER, ROLE_ADMIN]
 
     firewalls:
-        # disables authentication for assets and the profiler, adapt it according to your needs
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-
-        main:
-            pattern: ^/
-            http_basic: ~
-            provider: our_db_provider
-            
-            anonymous: ~
+        my_authorize:
+#            pattern: user_login
             form_login:
-                login_path: /securiy/login
-                check_path: /security/login_check
+#                provider: custom
+#                csrf_provider: app.webservice_user_provider
+#                provider: webservice
+                provider: our_db_provider
+                use_forward: false
+                check_path: user_login_check
+                login_path: user_login
+                failure_path: null
+            anonymous: true
+        
+    
+#        default:
+#            anonymous: ~
+#            http_basic: ~
+            
+        # disables authentication for assets and the profiler, adapt it according to your needs
+#        dev:
+#            pattern: ^/(_(profiler|wdt)|css|images|js)/
+#            security: false
+
+#        main:
+#            anonymous: ~
+#            logout: ~
+            
+#            guard:
+#                authenticators:
+#                    - app.token_authenticator
                 
+    access_control:
+        - { path: ^/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/. roles: ROLE_ADMIN}
             # activate different ways to authenticate
 
             # http_basic: ~

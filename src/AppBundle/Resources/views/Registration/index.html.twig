@@ -1,0 +1,19 @@
+{# app/Resources/views/registration/register.html.twig #}
+{% extends '::base.html.twig' %}
+
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block body %}
+<div class="col-lg-6">
+    {{ form_start(form) }}
+        {% if required is defined%}
+            <span class="required" title="This field is required">*</span>
+        {% endif %}
+        {{ form_row(form.username) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.plainPassword.first) }}
+        {{ form_row(form.plainPassword.second) }}
+        <button type="submit">Register!</button>
+    {{ form_end(form) }}
+</div>
+{% endblock %}
