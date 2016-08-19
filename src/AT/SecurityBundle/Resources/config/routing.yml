@@ -1,0 +1,3 @@
+at_security_homepage:
+    path:     /
+    defaults: { _controller: ATSecurityBundle:Default:index }
