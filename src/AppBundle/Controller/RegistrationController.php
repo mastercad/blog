@@ -26,7 +26,7 @@ class RegistrationController extends Controller
     {
         // 1) build the form
         $oUser = new User();
-        
+
         $oForm = $this->createForm(UserType::class, $oUser);
 
         // 2) handle the submit (will only happen on POST)
@@ -34,13 +34,12 @@ class RegistrationController extends Controller
         if ($oForm->isSubmitted() && $oForm->isValid()) {
 
             $oDoctrineManager = $this->getDoctrine()->getManager();
-            
             $oUserGroup = $oDoctrineManager->find('\AppBundle\Entity\Usergroup', 1);
-            
+
             // 3) Encode the password (you could also do this via Doctrine listener)
             $sPassword = $this->get('security.password_encoder')
                 ->encodePassword($oUser, $oUser->getPlainPassword());
-            
+
             $oUser->setPassword($sPassword);
             $oUser->setCreated(new \DateTime());
             $oUser->setUsergroup($oUserGroup);

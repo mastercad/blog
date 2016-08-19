@@ -21,11 +21,6 @@ use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 
 class WebserviceUserProvider implements UserProviderInterface
 {
-    public function __construct($oEverything = NULL)
-    {
-        var_dump($oEverything);
-    }
-
     public function loadUserByUsername($username)
     {
         // make a call to your webservice here

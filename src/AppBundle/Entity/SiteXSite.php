@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * SiteXSite
  */
@@ -79,6 +81,12 @@ class SiteXSite
     public function getMainsite()
     {
         return $this->mainsite;
+    }
+    
+    public function __construct()
+    {
+        $this->mainsite = new ArrayCollection();
+        $this->childsite = new ArrayCollection();
     }
 }
 

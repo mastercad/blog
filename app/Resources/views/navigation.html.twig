@@ -15,27 +15,40 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="braingstorm-navbar">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="{{ path("index") }}">Home
+                    <li {% if home_active is defined %} class="active" {% endif %}>
+                        <a href="{{ path("index") }}">
+                            Home
                             <span class="glyphicon glyphicon-home small"></span>
+                        </a>
+                    </li>
+                    <li {% if article_active is defined %} class="active" {% endif %}>
+                        <a href="{{ path("article_new") }}">
+                            Neuer Beitrag
+                            <span class="glyphicon glyphicon-edit small"></span>
                         </a>
                     </li>
                 </ul>
                 
                 <ul class="nav navbar-nav navbar-right nav-stacked">
-                    <li>
-                        <p class="navbar-text">
-                            {% if app.user %}
-                                 {{ app.user.getUserName() }}
-                        </p>
+                    {% if app.user %}
+                    <li {% if profile_active is defined %} class="active" {% endif %}>
+                        <a href="/profile">
+                         {{ app.user.getUserName() }}
+                            <span class="glyphicon glyphicon-user">
+                                
+                            </span>
+                        </a>
                     </li>
                     <li>
                         <a href="{{ path("user_password_resend") }}" >
                             <b>Logout</b>
                         </a>
                     </li>
+                    <li>
                     {% else %}
+                        <span class="navbar-text">
                             Already have an account?
-                        </p>
+                        </span>
                     </li>
                     <li class="dropdown">
                         <a href="{{ path("user_password_resend") }}" class="dropdown-toggle" data-toggle="dropdown">

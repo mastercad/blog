@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Model\DbTable\Site;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -34,13 +35,16 @@ class DefaultController extends Controller
 
     public function indexAction(Request $request)
     {
-        $oMailer = $this->get('app.mailer');
-        var_dump($oMailer);
+//        $oRepository = $this->getDoctrine()->getRepository();
         
-//        $navigation = $this->
+        $oSiteDbTable = new Site($this->container);
+        $oSites = $oSiteDbTable->findAllSites();
+        
+        var_dump($oSites);
+        
         // replace this example code with whatever you need
         return $this->render('AppBundle:Default:index.html.twig', array(
-            'navigation' => 'etrewfdsfsfds',
+            'home_active' => true,
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
         ));
     }

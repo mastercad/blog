@@ -14,3 +14,17 @@ services:
         
     app.webservice_user_provider:
         class: AppBundle\Security\User\WebserviceUserProvider
+        
+    bookingDatabase:
+        class: %db.class%
+        calls: 
+           - [setDBMS, [%database.bookingDatabase.dbms%]]
+           - [setHost, [%database.bookingDatabase.host%]]
+           - [setUser, [%database.bookingDatabase.user%]]
+           - [setDatabaseName, [%database.bookingDatabase.name%]]
+           - [setPassword, [%database.bookingDatabase.password%]]
+           - [setPort, [%database.bookingDatabase.port%]]
+
+    bookingTable:
+         class: AppBundle\Model\DbTable\Booking
+         arguments: ["@service_container"]
